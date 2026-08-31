@@ -1,4 +1,5 @@
 import axios from "axios";
+import {server} from "../constants/constant.js"
 import {
     useState,
     useEffect,
@@ -21,7 +22,7 @@ const DestinationSearch = ({
 
                 const { data } =
                     await axios.get(
-                        `http://localhost:3000/api/trip/search-destination?query=${query}`
+                        `${server}/trip/search-destination?query=${query}`
                     );
                 console.log(data);
                 setSuggestions(
