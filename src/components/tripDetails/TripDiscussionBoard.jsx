@@ -66,7 +66,10 @@ const TripDiscussionBoard = ({ trip }) => {
 
         // 3. Connect to WebSocket room if traveler joined or is host
         if (accessRes.hasAccess) {
-          const socket = io("http://localhost:5000", { withCredentials: true });
+          const socketUrl = import.meta.env.VITE_SERVER_URL
+            ? import.meta.env.VITE_SERVER_URL.replace(/\/api\/?$/, "")
+            : "http://localhost:3000";
+          const socket = io(socketUrl, { withCredentials: true });
           socketRef.current = socket;
 
           socket.emit("join_room", { tripId: trip.id, userId: user.id });

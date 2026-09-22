@@ -22,7 +22,7 @@ const DestinationSearch = ({
 
                 const { data } =
                     await axios.get(
-                        `${server}/trip/search-destination?query=${query}`
+                        `${server}trip/search-destination?query=${query}`
                     );
                 console.log(data);
                 setSuggestions(
