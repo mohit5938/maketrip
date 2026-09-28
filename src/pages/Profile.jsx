@@ -21,6 +21,7 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar.jsx";
 import { server } from "../constants/constant";
+import { userNotExists } from "../redux/reducers/auth.js";
 
 const Profile = () => {
   const dispatch = useDispatch();
@@ -140,11 +141,14 @@ const Profile = () => {
   const handleLogout = async () => {
     try {
       await axios.post(`${server}user/logout`, {}, { withCredentials: true });
+    } catch (error) {
+      console.error("Logout error", error);
+    } finally {
+      dispatch(userNotExists());
+      localStorage.removeItem("token");
+      localStorage.removeItem("user");
       toast.success("Logged out successfully");
       navigate("/");
-      window.location.reload();
-    } catch (error) {
-      toast.error("Logout failed");
     }
   };
 

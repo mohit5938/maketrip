@@ -79,6 +79,10 @@ const OtpLoginForm = ({ setScreen }) => {
                 }
             );
 
+            if (data.token) {
+                localStorage.setItem("token", data.token);
+            }
+
             dispatch(userExists(data.user));
 
             dispatch(closeAuthModal());

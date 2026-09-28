@@ -105,6 +105,9 @@ const SignUpForm = ({ setScreen }) => {
                     withCredentials: true,
                 }
             );
+            if (data.token) {
+                localStorage.setItem("token", data.token);
+            }
             dispatch(userExists(data.user));
             dispatch(closeAuthModal());
             toast.success(

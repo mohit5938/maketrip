@@ -41,6 +41,10 @@ const GoogleLogin = () => {
                 }
             );
 
+            if (data.token) {
+                localStorage.setItem("token", data.token);
+            }
+
             // Redux Login
             dispatch(
                 userExists(data.user)
