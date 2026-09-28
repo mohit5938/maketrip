@@ -151,7 +151,7 @@ const TripDiscussionBoard = ({ trip }) => {
   };
 
   return (
-    <section className="bg-white rounded-3xl border border-slate-200 shadow-xs p-6 lg:p-8 space-y-6">
+    <section id="group-chat" className="bg-white rounded-3xl border border-slate-200 shadow-xs p-6 lg:p-8 space-y-6">
       {/* Header */}
       <div className="flex items-center justify-between flex-wrap gap-4 border-b border-slate-100 pb-6">
         <div className="flex items-center gap-4">

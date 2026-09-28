@@ -65,9 +65,12 @@ const HostCard = ({ trip }) => {
                     {/* Button */}
 
                     <button
-
+                        onClick={() =>
+                            document
+                                .getElementById("group-chat")
+                                ?.scrollIntoView({ behavior: "smooth", block: "start" })
+                        }
                         className="flex items-center justify-center gap-3 px-6 py-4 rounded-2xl bg-pink-500 text-white font-semibold hover:bg-pink-600 transition"
-
                     >
 
                         <MessageCircle size={20} />
