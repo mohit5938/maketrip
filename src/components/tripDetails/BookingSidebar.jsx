@@ -70,6 +70,9 @@ const BookingSidebar = ({ trip }) => {
 
         );
 
+    const isTripStarted = trip?.start_date && new Date(trip.start_date) <= new Date();
+    const isFullyBooked = seatsLeft <= 0;
+
     return (
 
         <aside className="sticky top-24 space-y-6">
@@ -98,10 +101,9 @@ const BookingSidebar = ({ trip }) => {
 
                 <button 
                     onClick={handleJoinTrip}
-                className="w-full mt-8 py-4 rounded-2xl bg-gradient-to-r from-pink-500 to-violet-600 text-white font-semibold hover:opacity-90 transition">
-
-                    Join This Trip
-
+                    disabled={isTripStarted || isFullyBooked}
+                    className="w-full mt-8 py-4 rounded-2xl bg-gradient-to-r from-pink-500 to-violet-600 text-white font-semibold hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed transition">
+                    {isTripStarted ? "Trip Already Started" : isFullyBooked ? "Trip Fully Booked" : "Join This Trip"}
                 </button>
 
                 <p className="text-xs text-center text-gray-500 mt-4">

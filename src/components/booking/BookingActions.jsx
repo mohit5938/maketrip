@@ -74,6 +74,10 @@ const BookingActions = ({
         }
     };
 
+    const isTripStarted = trip?.start_date && new Date(trip.start_date) <= new Date();
+    const isFullyBooked = (trip?.travelers_limit != null && trip?.current_bookings != null) && 
+        ((trip.travelers_limit - trip.current_bookings) <= 0);
+
     return (
 
         <section className="bg-white border border-slate-200 rounded-2xl shadow-sm p-6 sticky top-24">
@@ -143,36 +147,28 @@ const BookingActions = ({
 
                 onClick={handleBooking}
 
-                disabled={loading}
+                disabled={loading || isTripStarted || isFullyBooked}
 
-                className="w-full mt-6 bg-gradient-to-r from-violet-600 to-pink-500 text-white rounded-xl py-3.5 flex items-center justify-center gap-2 font-semibold hover:opacity-95 disabled:opacity-60"
+                className="w-full mt-6 bg-gradient-to-r from-violet-600 to-pink-500 text-white rounded-xl py-3.5 flex items-center justify-center gap-2 font-semibold hover:opacity-95 disabled:opacity-50 disabled:cursor-not-allowed"
 
             >
 
                 {
-
-                    loading
-
-                        ?
-
+                    loading ? (
                         <>
-
-                            <Loader2
-
-                                size={18}
-
-                                className="animate-spin"
-
-                            />
-
+                            <Loader2 size={18} className="animate-spin" />
                             Processing...
-
                         </>
-                        :
+                    ) : isTripStarted ? (
+                        "Booking Closed (Trip Departed)"
+                    ) : isFullyBooked ? (
+                        "Trip Fully Booked"
+                    ) : (
                         <>
                             Continue to Payment
                             <ArrowRight size={18} />
                         </>
+                    )
                 }
 
             </button>
